@@ -1,0 +1,15 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventController;
+
+// Route::inertia('/', 'welcome')->name('home');
+Route::get('/', [EventController::class, 'index'])->name('home');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+});
+
+Route::resource('events', EventController::class);
+
+require __DIR__.'/settings.php';
